@@ -1,341 +1,235 @@
-import { motion } from 'framer-motion';
+import { motion } from 'framer-motion'
 import { UseTheme } from '../provider/ThemeProvider'
-import { cardVariants, containersVariants } from '../constants/motion';
+import { cardVariants, containersVariants } from '../constants/motion'
+
+const skillsData = [
+  { icon: '⚡', title: 'Algorithms & Problem Solving', tags: ['Dynamic Programming','Graph Theory','Greedy','Sorting','Substring'] },
+  { icon: '🗄️', title: 'Databases', tags: ['PostgreSQL','MySQL','MongoDB','Redis','SQLite','GCP'] },
+  { icon: '🚀', title: 'DevOps & Infrastructure', tags: ['Docker','Nginx','Linux','Gunicorn','Uvicorn'] },
+  { icon: '🔧', title: 'Frameworks & Libraries', tags: ['Node.js','Express','NestJS','Spring Boot','React','Next.js'] },
+  { icon: '💻', title: 'Programming Languages', tags: ['JavaScript','Java','Python','C++'] },
+  { icon: '🛠️', title: 'Tools & Technologies', tags: ['Git','Postman','VS Code','IntelliJ','PgAdmin4'] },
+]
+
+const experienceData = [
+  {
+    title: 'Freelance Frontend Developer',
+    date: 'Oct 2025 — Present',
+    desc: 'Built and deployed RESTful APIs for scalable web platforms using Go REST Framework and React, integrating third-party services for advanced functionality.',
+    achievements: [
+      'Go + React full-stack project with Google Maps API integration',
+      'Integrated Materials UI into Django projects',
+      'Version control and CI/CD pipelines via GitHub',
+      'Improved backend performance through query optimization',
+      'Designed modular project architectures',
+    ]
+  },
+  {
+    title: 'Frontend Developer',
+    date: 'Oct 2025 — Present',
+    desc: 'Built and deployed RESTful APIs using MERN Stack and Java Spring Boot, integrating third-party services for advanced web functionality.',
+    achievements: [
+      'Full-stack Java Spring Boot + React with API integration',
+      'Integrated Shadcn UI into Java projects',
+      'Containerization with Docker',
+      'Database query optimization for improved performance',
+      'Designed modular project architectures',
+    ]
+  }
+]
+
+const projectsData = [
+  {
+    title: 'Full Stack Web App — Spring Boot + React',
+    desc: 'Secure authentication, scalable REST APIs, role-based access control, and clean responsive UI.',
+    tech: ['Java','Spring Boot','Spring Security','JWT','PostgreSQL','React','Docker'],
+  },
+  {
+    title: 'MERN Platform with Google Integrations',
+    desc: 'Full-stack MERN app with secure auth, Google Maps location services, CKEditor rich text, and modern UI.',
+    tech: ['MongoDB','Express.js','React','Node.js','JWT','Google Maps','CKEditor 5'],
+  }
+]
+
+const Section = ({ children, theme }) => (
+  <motion.div
+    variants={containersVariants}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.1 }}
+    className={`rounded-2xl p-7 mb-6 border transition-all duration-300
+      ${theme === 'light'
+        ? 'bg-white border-indigo-100 hover:border-indigo-300 shadow-sm hover:shadow-md'
+        : 'bg-white/3 border-white/6 hover:border-indigo-500/30'}`}>
+    {children}
+  </motion.div>
+)
+
+const SectionTitle = ({ children, theme }) => (
+  <h2 className={`text-2xl font-bold mb-5
+    ${theme === 'light'
+      ? 'bg-linear-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent'
+      : 'bg-linear-to-r from-indigo-300 to-violet-400 bg-clip-text text-transparent'}`}>
+    {children}
+  </h2>
+)
 
 const Dashboard = () => {
-  const { theme } = UseTheme();
+  const { theme } = UseTheme()
+  const isDark = theme === 'dark' // your inverted logic
+
   return (
-    <div className={`min-h-screen ${theme === 'light' ? 'bg-gray-900 text-white border border-gray-600' : 'bg-gray-100 text-gray-900'} p-10`}>
+    <div className={`min-h-screen p-8 transition-colors duration-300
+      ${isDark ? 'bg-[#0d0d1f] text-slate-200' : 'bg-slate-50 text-slate-800'}`}>
+
       {/* Professional Summary */}
-      <motion.div
-        variants={containersVariants}
-        initial={'hidden'}
-        whileInView={'visible'}
-        viewport={{ once: true, amount: 0.2 }}
-        className={`p-6 space-y-4 shadow-lg transition duration-300 ${theme === 'light' ? 'bg-gray-900 text-blue-500 border border-gray-800 hover:shadow-cyan-500 transition duration-300' : 'bg-white text-gray-800'} rounded-lg my-8`}>
-        <motion.h1
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'text-white' : 'text-gray-900'} text-2xl md:text-4xl font-semibold`}>Professional Summary</motion.h1>
-        <p
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'text-gray-500' : 'text-gray-500'} font-semibold`}>I am a backend developer with a strong interest in software engineering.
-          My main focus is developing backend applications using MERN stack and Java (Spring Boot) technologies.
-          I have experience in database, authentication, API integrations and building real-time applications.
+      <Section theme={theme}>
+        <SectionTitle theme={theme}>Professional Summary</SectionTitle>
+        <p className={`text-sm leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+          Backend developer with a strong focus on software engineering. Specializes in MERN stack and
+          Java (Spring Boot), with hands-on experience in databases, authentication, API integrations,
+          and real-time systems. Currently exploring Docker, microservices, and scalable architectures
+          to build efficient, secure, and production-ready backends.
+        </p>
+      </Section>
 
-          I am also interested in learning about Docker, microservices and scalable architectures.
-          Building efficient, secure and scalable systems based on software engineering principles is my main goal.</p>
-      </motion.div>
-      {/* technical skills */}
-      <div className={`${theme === 'light' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}  p-6 rounded-md w-full h-full shadow-lg`}>
-        <motion.h1
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'text-white' : 'text-gray-900'} text-2xl md:text-4xl font-semibold`}
-        >Technical Skills</motion.h1>
+      {/* Technical Skills */}
+      <Section theme={theme}>
+        <SectionTitle theme={theme}>Technical Skills</SectionTitle>
         <motion.div
           variants={containersVariants}
-          initial={'hidden'}
-          whileInView={'visible'}
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 space-y-4 pt-10 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
-
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.5 }}
-            variants={cardVariants}
-            className={`${theme === 'light' ? 'bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition duration-300 hover:shadow-cyan-500' : 'bg-gray-100 text-gray-800'} 
-            space-y-4 rounded-lg p-6 shadow-lg`}>
-            <h6 className='text-blue-500 text-2xl font-semibold'>Algorithms & Problem Solving</h6>
-            <div className='space-y-4'>
-              <p>Dynamic Programming</p>
-              <p>Greedy Algorithms Graph Theory</p>
-              <p>Sorting and Searching</p>
-              <p>Substring Manipulation</p>
-              <p> Array Optimization</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.5 }}
-            variants={cardVariants}
-            className={`${theme === 'light' ? 'bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition duration-300 hover:shadow-cyan-500' : 'bg-gray-100 text-gray-800'} space-y-4 rounded-lg p-6 shadow-lg`}>
-            <h6 className='text-blue-500 text-2xl font-semibold'>Databases</h6>
-            <div className='space-y-4'>
-              <p>PostgreSQL MySQL SQLite</p>
-              <p>Google Cloud PostgreSQL</p>
-              <p>MongoDB Redis</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.5 }}
-            variants={cardVariants}
-            className={`${theme === 'light' ? 'bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition duration-300 hover:shadow-cyan-500' : 'bg-gray-100 text-gray-800'} space-y-4 rounded-lg p-6 shadow-lg`}>
-            <h6 className='text-blue-500 text-2xl font-semibold'>DevOps & Infrastructure</h6>
-            <div className='space-y-4'>
-              <p>Nginx Gunicorn Uvicorn Docker</p>
-              <p>Linux (Ubuntu)</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.5 }}
-            variants={cardVariants}
-            className={`${theme === 'light' ? 'bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition duration-300 hover:shadow-cyan-500' : 'bg-gray-100 text-gray-800'} space-y-4 rounded-lg p-6 shadow-lg`}>
-            <h6 className='text-blue-500 text-2xl font-semibold'>Frameworks & Libraries</h6>
-            <div className='space-y-4'>
-              <p>NodeJs ExpressJs NestJs</p>
-              <p>Java Spring Boot Gradle Maven</p>
-              <p>Bootstrap ReactJs NextJs</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.5 }}
-            className={`${theme === 'light' ? 'bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition duration-300 hover:shadow-cyan-500' : 'bg-gray-100 text-gray-800'} space-y-4 rounded-lg p-6 shadow-lg`}>
-            <h6 className='text-blue-500 text-2xl font-semibold'>Programming Languages</h6>
-            <div className='space-y-4'>
-              <p>C++ Java Python JavaScript</p>
-            </div>
-          </motion.div>
-
-          <motion.div
-            variants={cardVariants}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.5 }}
-            className={`${theme === 'light' ? 'bg-gray-900 border border-gray-800 text-white hover:bg-gray-800 transition duration-300 hover:shadow-cyan-500' : 'bg-gray-100 text-gray-800'} space-y-4 rounded-lg p-6 shadow-lg`}>
-            <h6 className='text-blue-500 text-2xl font-semibold'>Tools & Technologies</h6>
-            <div className='space-y-4'>
-              <p>Git Postman PgAdmin4</p>
-              <p>VS Code IntelliJ Idea</p>
-            </div>
-          </motion.div>
-
+          initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {skillsData.map((skill, i) => (
+            <motion.div key={i} variants={cardVariants}
+              whileHover={{ y: -3, scale: 1.01 }}
+              className={`rounded-xl p-4 border transition-all duration-200
+                ${isDark
+                  ? 'bg-indigo-500/6 border-indigo-500/20 hover:bg-indigo-500/10 hover:border-indigo-500/35'
+                  : 'bg-indigo-50/60 border-indigo-100 hover:bg-indigo-50 hover:border-indigo-300'}`}>
+              <div className="text-xl mb-2">{skill.icon}</div>
+              <h3 className={`text-xs font-600 mb-2 ${isDark ? 'text-indigo-300' : 'text-indigo-600'}`}>{skill.title}</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {skill.tags.map((t, j) => (
+                  <span key={j} className={`text-[10px] px-2 py-0.5 rounded-full font-medium border
+                    ${isDark
+                      ? 'bg-violet-500/10 text-violet-300 border-violet-500/20'
+                      : 'bg-indigo-100/80 text-indigo-700 border-indigo-200'}`}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+          ))}
         </motion.div>
-      </div>
-      {/* professional expirence */}
-      <motion.div
-        variants={containersVariants}
-        initial={'hidden'}
-        whileInView={'visible'}
-        viewport={{ once: true, amount: 0.2 }}
-        className={`${theme === 'light' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} p-6 my-6 rounded-md w-full h-full shadow-lg`}>
-        <motion.h1
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'text-white' : 'text-gray-900'} text-2xl md:text-4xl font-semibold`}
-        >Professional Expirence</motion.h1>
-        <motion.div
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'bg-gray-900 text-white border border-gray-800 hover:bg-gray-800 transition duration-300 rounded-lg shadow-md' : 'bg-gray-100 hover:bg-gray-200 transition duration-300 text-gray-900'} rounded-md p-6 mt-6 space-y-4`}>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-            <h2 className='text-blue-500 text-3xl font-semibold'>Freelance Frontend Developer</h2>
-            <p className='bg-blue-500 text-white rounded-full py-1 px-3'>Octomber 2025 - Present</p>
-          </div>
-          <p>Built and deployed RESTful APIs for various scalable web platforms using the Go REST Framework and React, integrating third-party services for advanced functionality.</p>
-          <h2 className='text-2xl font-semibold text-blue-500'>Key Achievements</h2>
-          <ol className='space-y-1.5'>
-            <li>• Developed a Go and React full-stack project with Google Maps API integration</li>
-            <li>• Integrated Materials UI into Django projects</li>
-            <li>• Utilized GitHub for version control and CI/CD pipelines</li>
-            <li>• Improved backend performance by optimizing database queries</li>
-            <li>• Designed modular project architectures</li>
-          </ol>
-        </motion.div>
-        {/* backend */}
-        <div className={`${theme === 'light' ? 'bg-gray-900 text-white border border-gray-800 hover:bg-gray-800 transition duration-300 rounded-lg shadow-md' : 'bg-gray-100 hover:bg-gray-200 transition duration-300 text-gray-900'} rounded-md p-6 mt-6 space-y-4`}>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-            <h2 className='text-blue-500 text-3xl font-semibold'>Frontend Developer</h2>
-            <p className='bg-blue-500 text-white rounded-full py-1 px-3'>Octomber 2025 - Present</p>
-          </div>
-          <p>Built and deployed RESTful APIs for various scalable web platforms using the MERN Stack and Java Spring Boot REST Framework, integrating third-party services for advanced functionality.</p>
-          <h2 className='text-2xl font-semibold text-blue-500'>Key Achievements</h2>
-          <ol className='space-y-1.5'>
-            <li>• Developed a full stack project in Java, Spring Boot and React with API integration</li>
-            <li>• Integrated Shadcn UI into Java  projects</li>
-            <li>• Containerization implemented using Docker</li>
-            <li>• Improved backend performance by optimizing database queries</li>
-            <li>• Designed modular project architectures</li>
-          </ol>
+      </Section>
+
+      {/* Experience */}
+      <Section theme={theme}>
+        <SectionTitle theme={theme}>Professional Experience</SectionTitle>
+        <div className="space-y-4">
+          {experienceData.map((exp, i) => (
+            <motion.div key={i} variants={cardVariants}
+              className={`rounded-xl p-5 border transition-all duration-200
+                ${isDark
+                  ? 'bg-white/2 border-white/5 hover:bg-indigo-500/[.07] hover:border-indigo-500/25'
+                  : 'bg-slate-50 border-slate-200 hover:bg-indigo-50/40 hover:border-indigo-200'}`}>
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-3">
+                <h3 className={`text-base font-semibold ${isDark ? 'text-indigo-300' : 'text-indigo-600'}`}>{exp.title}</h3>
+                <span className={`text-[11px] px-3 py-1 rounded-full font-medium
+                  ${isDark ? 'bg-indigo-500/15 text-indigo-400' : 'bg-indigo-100 text-indigo-700'}`}>
+                  {exp.date}
+                </span>
+              </div>
+              <p className={`text-xs leading-relaxed mb-3 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{exp.desc}</p>
+              <p className={`text-[10px] font-semibold uppercase tracking-widest mb-2 ${isDark ? 'text-indigo-500' : 'text-indigo-400'}`}>Key Achievements</p>
+              <ul className={`text-xs space-y-1 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+                {exp.achievements.map((a, j) => (
+                  <li key={j} className="flex items-start gap-1.5">
+                    <span className="text-indigo-500 font-bold mt-0.5">›</span>{a}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
-      {/* projects */}
-      <motion.div
-        variants={containersVariants}
-        initial={'hidden'}
-        whileInView={'visible'}
-        viewport={{ once: true, amount: 0.2 }}
-        className={`${theme === 'light' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} p-6 my-6 rounded-md w-full h-full shadow-lg`}>
-        <motion.h1
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'text-white' : 'text-gray-900'} text-2xl md:text-4xl font-semibold`}
-        >Key Projects</motion.h1>
-        <motion.div
-          variants={containersVariants}
-          initial={'hidden'}
-          whileInView={'visible'}
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10 py-6">
+      </Section>
 
-          <motion.div
-            variants={cardVariants}
-            className={`${theme === 'light'
-              ? 'bg-gray-900 text-white border border-gray-800 hover:bg-gray-800 hover:shadow-cyan-500'
-              : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-              } transition duration-300 p-6 shadow-lg rounded-2xl`}
-          >
-            <h2 className="text-2xl py-4 font-semibold text-blue-500">
-              Full Stack Web Application (Spring Boot + React)
-            </h2>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Overview</h3>
-              <p>
-                A modern full-stack web application built using Spring Boot and React.
-                The project focuses on secure authentication, scalable REST APIs,
-                role-based access control, and a clean, responsive user interface.
-              </p>
-
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold">Technologies</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>Java, Spring Boot, Spring Security</li>
-                  <li>JWT (Access & Refresh Tokens)</li>
-                  <li>PostgreSQL</li>
-                  <li>React, Tailwind CSS</li>
-                  <li>RESTful API Architecture</li>
-                  <li>Docker, Git & GitHub</li>
-                </ul>
+      {/* Projects */}
+      <Section theme={theme}>
+        <SectionTitle theme={theme}>Key Projects</SectionTitle>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {projectsData.map((proj, i) => (
+            <motion.div key={i} variants={cardVariants}
+              whileHover={{ y: -3 }}
+              className={`rounded-xl p-5 border transition-all duration-200
+                ${isDark
+                  ? 'bg-indigo-500/4 border-indigo-500/15 hover:bg-indigo-500/10 hover:border-indigo-500/30'
+                  : 'bg-slate-50 border-slate-200 hover:bg-indigo-50/40 hover:border-indigo-200'}`}>
+              <h3 className={`text-sm font-semibold mb-2 leading-snug ${isDark ? 'text-indigo-300' : 'text-indigo-600'}`}>{proj.title}</h3>
+              <p className={`text-xs leading-relaxed mb-3 ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{proj.desc}</p>
+              <div className="flex flex-wrap gap-1.5">
+                {proj.tech.map((t, j) => (
+                  <span key={j} className={`text-[10px] px-2 py-0.5 rounded font-medium border
+                    ${isDark ? 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20' : 'bg-cyan-50 text-cyan-700 border-cyan-200'}`}>
+                    {t}
+                  </span>
+                ))}
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
 
-            <div className="space-y-4 pt-4">
-              <h3 className="text-lg font-semibold">Key Achievements</h3>
-              <ol className="space-y-2 list-disc list-inside">
-                <li>Implemented secure authentication with JWT and refresh token rotation</li>
-                <li>Built role-based authorization (Admin / User)</li>
-                <li>Designed scalable REST APIs with clean architecture principles</li>
-                <li>Integrated PostgreSQL with optimized queries</li>
-                <li>Created responsive UI using React and Tailwind CSS</li>
-                <li>Containerized the application using Docker</li>
-              </ol>
-            </div>
-          </motion.div>
-
-
-          <motion.div
-            variants={cardVariants}
-            className={`${theme === 'light'
-              ? 'bg-gray-900 text-white border border-gray-800 hover:bg-gray-800 hover:shadow-cyan-500'
-              : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-              } transition duration-300 p-6 shadow-lg rounded-2xl`}
-          >
-            <h2 className="text-2xl py-4 font-semibold text-blue-500">
-              MERN Stack Full-Stack Platform with Google Integrations
-            </h2>
-
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold">Overview</h3>
-              <p>
-                A full-stack MERN application built with MongoDB, Express.js, React, and Node.js.
-                The platform provides secure authentication, location-based services,
-                and rich content management with a modern, responsive UI.
+      {/* Education */}
+      <Section theme={theme}>
+        <SectionTitle theme={theme}>Education</SectionTitle>
+        <motion.div variants={cardVariants}
+          className={`rounded-xl p-5 border transition-all duration-200
+            ${isDark
+              ? 'bg-indigo-500/4 border-indigo-500/15 hover:bg-indigo-500/09 hover:border-indigo-500/25'
+              : 'bg-slate-50 border-slate-200 hover:bg-indigo-50/40 hover:border-indigo-200'}`}>
+          <div className="flex flex-wrap justify-between gap-3 mb-2">
+            <div>
+              <h3 className={`text-base font-semibold ${isDark ? 'text-indigo-300' : 'text-indigo-600'}`}>
+                Bachelor's in Software Engineering
+              </h3>
+              <p className={`text-xs mt-1 ${isDark ? 'text-slate-500' : 'text-slate-400'}`}>
+                TUIT — Urgench Branch, Uzbekistan
               </p>
-
-              <div className="space-y-2">
-                <h3 className="text-lg font-semibold">Technologies</h3>
-                <ul className="list-disc list-inside space-y-1">
-                  <li>MongoDB & Mongoose</li>
-                  <li>Express.js & Node.js</li>
-                  <li>React & Tailwind CSS</li>
-                  <li>JWT Authentication (Access & Refresh Tokens)</li>
-                  <li>Google Maps API</li>
-                  <li>Google OAuth / Email Verification</li>
-                  <li>CKEditor 5</li>
-                  <li>RESTful API</li>
-                  <li>Git & GitHub</li>
-                </ul>
-              </div>
             </div>
-
-            <div className="space-y-4 pt-4">
-              <h3 className="text-lg font-semibold">Key Achievements</h3>
-              <ol className="space-y-2 list-disc list-inside">
-                <li>Built secure authentication using JWT and token-based email verification</li>
-                <li>Integrated Google Maps API for real-time location-based features</li>
-                <li>Developed scalable REST APIs with Express.js and Node.js</li>
-                <li>Implemented rich text editing with CKEditor 5</li>
-                <li>Designed a responsive and interactive UI using React and Tailwind CSS</li>
-                <li>Structured MongoDB schemas with Mongoose for performance and scalability</li>
-              </ol>
-            </div>
-          </motion.div>
-
-
-        </motion.div>
-      </motion.div>
-      {/* education */}
-      <motion.div
-        variants={containersVariants}
-        initial={'hidden'}
-        whileInView={'visible'}
-        viewport={{ once: true, amount: 0.2 }}
-        className={`${theme === 'light' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} p-6 my-6 rounded-md w-full h-full shadow-lg`}>
-        <motion.h1
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'text-white' : 'text-gray-900'} text-2xl md:text-4xl font-semibold py-4`}
-        >Education</motion.h1>
-
-        <motion.div
-          variants={cardVariants}
-          className={`${theme === 'light' ? 'bg-gray-900 text-white border border-gray-800 hover:bg-gray-800 transition duration-300' : 'bg-gray-100 text-gray-900 hover:bg-gray-200 transition duration-300'} p-6 rounded-md shadow-md space-y-4`}>
-
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-8 lg:gap-10">
-
-            <div className="space-y-2">
-              <h2 className='text-3xl font-semibold text-blue-500'>Bachelor's Degree in Software engineering</h2>
-              <p>Tashkent University of Information Technologies (TUIT), Urgench Branch, Uzbekistan</p>
-            </div>
-            <p className='bg-blue-500 text-white rounded-full py-1 px-3'>September 2022 - Present</p>
-
+            <span className={`text-[11px] px-3 py-1 rounded-full font-medium h-fit
+              ${isDark ? 'bg-indigo-500/15 text-indigo-400' : 'bg-indigo-100 text-indigo-700'}`}>
+              Sep 2022 — Present
+            </span>
           </div>
-          <p >Currently a 3rd-year student, focusing on software engineering, algorithms, and system design.  Actively participating in university programming contests and hackathons to enhance practical skills.</p>
+          <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>
+            3rd-year student focused on software engineering, algorithms, and system design. Actively participates in programming contests and hackathons.
+          </p>
         </motion.div>
+      </Section>
 
-      </motion.div>
-      {/* Additional Achievments */}
-      <motion.div
-        variants={containersVariants}
-        initial={'hidden'}
-        whileInView={'visible'}
-        viewport={{ once: true, amount: 0.2 }}
-        className={`${theme === 'light' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} p-6 my-6 rounded-md w-full h-full shadow-lg`}>
-        <h1
-          className={`${theme === 'light' ? 'text-white' : 'text-gray-900'} text-2xl md:text-4xl font-semibold py-4`}
-        >Additional Achievments</h1>
-        <motion.div
-          variants={containersVariants}
-          initial={'hidden'}
-          whileInView={'visible'}
-          viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 space-y-4 pt-10 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
-          <motion.div
-            variants={cardVariants}
-            className={`${theme === 'light' ? 'bg-gray-900 text-white border border-gray-800 hover:shadow-cyan-500 transition duration-300 hover:bg-gray-800' : 'bg-gray-100 text-gray-900 hover:bg-gray-200 transition duration-300'} p-6 rounded-md shadow-lg space-y-4`}>
-            <h2 className='text-2xl font-semibold text-blue-500'>Performance Optimization</h2>
-            <p>Successfully scaled a Django-based server to handle 1,000 requests/second by implementing database caching, load balancing with Nginx, and optimizing Gunicorn workers.</p>
-          </motion.div>
-          <motion.div
-            variants={cardVariants}
-            className={`${theme === 'light' ? 'bg-gray-900 text-white border border-gray-800 hover:shadow-cyan-500 transition duration-300 hover:bg-gray-800' : 'bg-gray-100 text-gray-900 hover:bg-gray-200 transition duration-300'} p-6 rounded-md shadow-lg space-y-4`}>
-            <h2 className='text-2xl font-semibold text-blue-500'>Algorithmic Excellence</h2>
-            <p>Proficient in a variety of algorithmic techniques, demonstrated through solving 60+ problems on LeetCode with optimal time and space complexities.</p>
-          </motion.div>
-        </motion.div>
-      </motion.div>
+      {/* Additional Achievements */}
+      <Section theme={theme}>
+        <SectionTitle theme={theme}>Additional Achievements</SectionTitle>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { num: '1K', label: 'Req/s Performance', desc: 'Scaled a Django server to handle 1,000 requests/second via database caching, Nginx load balancing, and Gunicorn optimization.' },
+            { num: '60+', label: 'LeetCode Problems', desc: 'Proficient in dynamic programming, graph theory, and greedy algorithms with optimal time and space complexities.' }
+          ].map((a, i) => (
+            <motion.div key={i} variants={cardVariants}
+              whileHover={{ y: -2 }}
+              className={`rounded-xl p-5 border transition-all duration-200
+                ${isDark
+                  ? 'bg-linear-to-br from-indigo-500/8 to-violet-500/5 border-violet-500/20 hover:border-violet-500/35'
+                  : 'bg-linear-to-br from-indigo-50 to-violet-50 border-indigo-200 hover:border-indigo-300'}`}>
+              <div className={`text-3xl font-bold leading-none ${isDark ? 'text-indigo-400' : 'text-indigo-600'}`}>{a.num}</div>
+              <div className={`text-sm font-semibold my-2 ${isDark ? 'text-indigo-300' : 'text-indigo-700'}`}>{a.label}</div>
+              <p className={`text-xs leading-relaxed ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{a.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </Section>
     </div>
   )
 }
